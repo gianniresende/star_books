@@ -109,6 +109,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.5.2)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.4)
@@ -155,11 +157,16 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
+    versionist (2.0.1)
+      activesupport (>= 3)
+      railties (>= 3)
+      yard (~> 0.9.20)
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yard (0.9.26)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -173,9 +180,11 @@ DEPENDENCIES
   listen (~> 3.3)
   pg (>= 0.18, < 2.0)
   puma (~> 5.0)
+  rack-cors (~> 1.1.1)
   rails (~> 6.1.4)
   spring
   tzinfo-data
+  versionist
 
 RUBY VERSION
    ruby 2.7.1p83
