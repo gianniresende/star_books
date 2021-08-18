@@ -1,0 +1,47 @@
+version: "3.3"
+services:
+  cache:
+    image: "redis:alpine"
+    ports:
+      - "6380:6379"
+  app:
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+      - gems:/gems
+    env_file: .env
+    tty: true
+    stdin_open: true
+    command: ./docker/rails-entrypoint.sh
+  caddy:
+    image: caddy/caddy:2.2.1-alpine
+    container_name: caddy-service
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - '443:443'
+    volumes:
+      - $PWD/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/site:/srv
+      - caddy_data:/data
+  sidekiq:
+    build:
+      context: .
+    env_file: .env
+    volumes:
+      - .:/app
+    links:
+      - cache
+      - app
+    depends_on:
+      - cache
+      - app
+    entrypoint: docker/sidekiq-entrypoint.sh
+volumes:
+  gems:
+  caddy_data:
+  caddy_config:
+  

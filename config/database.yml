@@ -1,0 +1,42 @@
+
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
+#   host: localhost
+#   username: postgres
+#   password: postgres
+#   timeout: 5000
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+# development:
+#   <<: *default
+#   database: star_books_development
+
+# test:
+#   <<: *default
+#   database: star_books_test
+
+# production:
+#   <<: *default
+#   database: star_books_production
+#   username: star_books
+#   password: <%= ENV['STAR_BOOKS_DATABASE_PASSWORD'] %>
+
+defaults: &defaults
+  adapter: postgresql
+  pool: 25
+  timeout: 5000
+  encoding: unicode
+
+development:
+  <<: *defaults
+  url: <%= ENV['DATABASE_URL_DEVELOPMENT'] %>
+
+test:
+  <<: *defaults
+  url: <%= ENV['DATABASE_URL_TEST'] %>
+
+production:
+  <<: *defaults
+  url: <%= ENV['DATABASE_URL_PROPDUCTION'] %>
+
